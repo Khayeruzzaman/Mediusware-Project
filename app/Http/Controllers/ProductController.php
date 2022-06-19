@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Product;
 use App\Models\ProductVariant;
@@ -17,7 +18,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('products.index');
+        $products = Product::orderBy('id', 'asc')->paginate(3);
+        $variants = Variant::with('product_variants')->get();
+        
+        return view('products.index')->with('products', $products)->with('variants', $variants);
     }
 
     /**
