@@ -9,7 +9,7 @@
         <div class="card-header py-3">
             <div class="form-row">
                 <div class="col-md-3">
-                    <input type="text" placeholder="Serch" class="form-control">
+                    <input type="text" placeholder="Search" class="form-control">
                 </div>
                 <div class="col-md-1">
                     <button class="btn btn-primary">Search</button>
@@ -28,14 +28,7 @@
 
                     </tr>
                     </thead>
-                    <tfoot>
-                    <tr>
-                        <th>#</th>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Action</th>
-                    </tr>
-                    </tfoot>
+                    
                     <tbody>
                     @foreach($variants as $key=>$variant)
                         <tr>
@@ -45,7 +38,8 @@
                             <td>
                                 <div class="btn-group btn-group-sm">
                                     <a href="{{ route('product-variant.edit',$variant) }}" class="btn btn-primary">Edit</a>
-                                    <button class="btn btn-danger">delete</button>
+
+                                    <button class="btn btn-danger">Delete</button>
                                 </div>
                             </td>
                         </tr>
@@ -57,7 +51,8 @@
         </div>
 
         <div class="card-footer d-sm-flex align-items-center justify-content-between mb-4">
-            <p>1 to 10 out of 100</p>
+        <p>Showing {{($variants->currentPage()-1)*$variants->perPage()+1}} to 
+                        {{(($variants->currentPage()-1)*$variants->perPage()+1) + ($variants->count()-1)}} out of  {{$variants->total()}}</p>
             {{ $variants->links() }}
         </div>
     </div>
